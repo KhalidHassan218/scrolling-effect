@@ -89,7 +89,7 @@ const MobileView = () => {
 
 
   return (
-    <div className="tabletandmobile container pt-10 mx-auto px-4 block md:hidden"  >
+    <div className="tabletandmobile container pt-10 mx-auto px-11 block md:hidden"  >
         
         <div className="top-section sticky">
           <div className="feature_section flex justify-between items-center  relative ">
