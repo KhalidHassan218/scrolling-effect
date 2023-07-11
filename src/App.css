@@ -4,6 +4,7 @@
   width: 550px;
   max-width: 100%;
 }
+/* // for the feature title hover bar  */
 .theselection {
   display: none;
   height: 100%;
@@ -22,6 +23,7 @@
   border-radius: 30px;
 }
 
+/* // to divide the screen  */
 .left-section,
 .right-section {
   flex-basis: 45%;
@@ -38,6 +40,8 @@
   font-size: 35px;
 }
 
+
+/* // give margin bottom to each part that has h1 and p to give the space shown between each block element */
 .desktop .eachpart{
-    margin-bottom: calc(100vh - 300px);
+    margin-bottom: calc(100vh - 55vh);    
 }

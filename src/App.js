@@ -4,44 +4,12 @@ import food from "./assets/desktop-wallpaper-egyptian-food-arabic-food.jpg";
 import river from "./assets/HD-wallpaper-the-nile-city-boats-desert-egypt-river-nile.jpg";
 import { useEffect, useRef, useState } from "react";
 import MobileView from "./components/MobileView/MobileView";
-import { useMotionValue, useTransform, useViewportScroll } from "framer-motion";
+
 function App() {
-  const [isactive, setIsactive] = useState(0);
-  const [doNotScroll, setDoNotScroll] = useState(false)
+  const [isactive, setIsactive] = useState(0); // used to determine which feature image to show and which feature title  to show
+   const targetRefs = useRef([]); // used the ref to mark each element on the page that needs to be scrolled to
 
-  const targetRefs = useRef([]);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-     
-  //       targetRefs.current.forEach((targetRef, index) => {
-  //         if (targetRef) {
-  //           const targetElement = targetRef;
-  //           const rect = targetElement.getBoundingClientRect();
-  //          const imagePosition= document.querySelector(".feature_image").getBoundingClientRect()
-         
-            
-            
-  //           if (rect.top <= imagePosition.top && rect.bottom >= imagePosition.bottom) {
-              
-  //           console.log(rect.top);
-  //           console.log(imagePosition.top);
-  //             setIsactive(index);
-  //           }
-            
-  //         }
-  //       });
-      
-      
-  //   }
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-  
+  // useeffect to trigger the scrolling and change the index when we reach any ref element 
   useEffect(() => {
     const handleScroll = () => {
       const imagePosition = document.querySelector(".feature_image").getBoundingClientRect();
@@ -82,16 +50,10 @@ function App() {
   ];
 
   const handleFeature = (index) => {
-    // setDoNotScroll(true);
+   
     const targetElement = targetRefs.current[index];
     console.log(targetElement , "target");
-    // targetElement.scrollIntoView({ behavior: "smooth"  });
-  //  const thelocationoftheelement = targetElement.getBoundingClientRect().top;
-  //  console.log(thelocationoftheelement);
-  //   window.scroll({
-  //     top: thelocationoftheelement - 60 ,
-  //     behavior: "smooth",
-  //   });
+    
       
   
   const yOffset = -60;
@@ -102,6 +64,8 @@ function App() {
 
 
   };
+
+  // used to animate the mouse hover on the feature titles so the bar moves when we hover over the feature title
   const handleMouseEnter = (index) => {
     const selectionElement = document.querySelector(".theselection");
     selectionElement.style.display = `block`;
@@ -113,14 +77,14 @@ function App() {
     selectionElement.style.left = `${positionLeft}px`;
     selectionElement.style.top = `${positionTop}px`;
   };
+
+  // used to hide the bar when we leave the feature title by mouse 
   const handleMouseLeave = () => {
     const selectionElement = document.querySelector(".theselection");
     selectionElement.style.display = `none`;
   };
 
-  const viewportHeight = window.innerHeight; // Get the height of the viewport in pixels
-  const pixels = 5300;
-  const vhValue = (pixels / viewportHeight) * 100;
+  
 
   return (
     <>
@@ -128,7 +92,7 @@ function App() {
         <div
           className=" flex justify-between 
   parent_section gap-x-2.5	"
-          // style={{ height: `${vhValue}vh` }}
+          
         >
           <div className="left-section sticky">
             <div className="feature_section flex justify-end items-center relative ">
@@ -266,6 +230,8 @@ function App() {
           </div>
         </div>
       </div>
+   {/* mobile component , same thing there but with slight changes   */}
+
       <MobileView />
     </>
   );
