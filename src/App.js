@@ -4,37 +4,67 @@ import food from "./assets/desktop-wallpaper-egyptian-food-arabic-food.jpg";
 import river from "./assets/HD-wallpaper-the-nile-city-boats-desert-egypt-river-nile.jpg";
 import { useEffect, useRef, useState } from "react";
 import MobileView from "./components/MobileView/MobileView";
+import { useMotionValue, useTransform, useViewportScroll } from "framer-motion";
 function App() {
   const [isactive, setIsactive] = useState(0);
   const [doNotScroll, setDoNotScroll] = useState(false)
 
   const targetRefs = useRef([]);
 
+  // useEffect(() => {
+  //   const handleScroll = () => {
+     
+  //       targetRefs.current.forEach((targetRef, index) => {
+  //         if (targetRef) {
+  //           const targetElement = targetRef;
+  //           const rect = targetElement.getBoundingClientRect();
+  //          const imagePosition= document.querySelector(".feature_image").getBoundingClientRect()
+         
+            
+            
+  //           if (rect.top <= imagePosition.top && rect.bottom >= imagePosition.bottom) {
+              
+  //           console.log(rect.top);
+  //           console.log(imagePosition.top);
+  //             setIsactive(index);
+  //           }
+            
+  //         }
+  //       });
+      
+      
+  //   }
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+  
   useEffect(() => {
     const handleScroll = () => {
-      if(!doNotScroll) {
-        targetRefs.current.forEach((targetRef, index) => {
-          if (targetRef) {
-            const targetElement = targetRef;
-            const rect = targetElement.getBoundingClientRect();
-            const windowHeight =
-            window.innerHeight || document.documentElement.clientHeight;
-            
-            if (rect.top >= 0 && rect.bottom <= windowHeight) {
-              setIsactive(index);
-            }
-          }
-        });
-      };
-      
-    }
-
+      const imagePosition = document.querySelector(".feature_image").getBoundingClientRect();
+  
+      targetRefs.current.forEach((ref, index) => {
+        const targetElement = ref;
+        const rect = targetElement.getBoundingClientRect();
+  
+        if (
+          (rect.top <= imagePosition.top && rect.bottom >= imagePosition.top) ||
+          (rect.top <= imagePosition.bottom && rect.bottom >= imagePosition.bottom)
+        ) {
+          setIsactive(index);
+        }
+      });
+    };
+  
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+ 
 
   const features = [
     {
@@ -54,9 +84,23 @@ function App() {
   const handleFeature = (index) => {
     // setDoNotScroll(true);
     const targetElement = targetRefs.current[index];
-    targetElement.scrollIntoView({ behavior: "smooth" });
+    console.log(targetElement , "target");
+    // targetElement.scrollIntoView({ behavior: "smooth"  });
+  //  const thelocationoftheelement = targetElement.getBoundingClientRect().top;
+  //  console.log(thelocationoftheelement);
+  //   window.scroll({
+  //     top: thelocationoftheelement - 60 ,
+  //     behavior: "smooth",
+  //   });
       
-    
+  
+  const yOffset = -60;
+  const y = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;
+  
+  window.scrollTo({ top: y, behavior: 'smooth' });
+ 
+
+
   };
   const handleMouseEnter = (index) => {
     const selectionElement = document.querySelector(".theselection");
@@ -84,7 +128,7 @@ function App() {
         <div
           className=" flex justify-between 
   parent_section gap-x-2.5	"
-          style={{ height: `${vhValue}vh` }}
+          // style={{ height: `${vhValue}vh` }}
         >
           <div className="left-section sticky">
             <div className="feature_section flex justify-end items-center relative ">

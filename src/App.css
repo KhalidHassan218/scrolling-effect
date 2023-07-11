@@ -37,3 +37,7 @@
 .right-section h1 {
   font-size: 35px;
 }
+
+.desktop .eachpart{
+    margin-bottom: calc(100vh - 300px);
+}
