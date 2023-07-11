@@ -80,7 +80,7 @@ function App() {
 
   return (
     <>
-      <div className="desktop container pt-10 mx-auto px-4 hidden md:block">
+      <div className="desktop container pt-10 mx-auto px-28 hidden md:block">
         <div
           className=" flex justify-between 
   parent_section"
