@@ -83,7 +83,7 @@ function App() {
       <div className="desktop container pt-10 mx-auto px-28 hidden md:block">
         <div
           className=" flex justify-between 
-  parent_section"
+  parent_section gap-x-2.5	"
           style={{ height: `${vhValue}vh` }}
         >
           <div className="left-section sticky">
@@ -105,7 +105,7 @@ function App() {
             <div>
               <img
                 src={features[isactive].image}
-                className="feature_image mt-10"
+                className="feature_image mt-10" alt=""
               />
             </div>
           </div>
